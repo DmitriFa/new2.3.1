@@ -9,10 +9,11 @@ import web.model.User;
 import java.sql.SQLException;
 import java.util.List;
 
+@Transactional
 public class UserServiceImp implements UserService {
 
-
     UserDaoImp userDao = new UserDaoImp();
+
   @Autowired
   private UserDao userdao;
 
@@ -29,14 +30,32 @@ public class UserServiceImp implements UserService {
         userDao.saveUser(name,lastName,age);
     }
 
-   // public void addUser(User user) throws SQLException {
-   //     userDao.addUser(user);
-   // }
+    public void addUser(User user) throws SQLException {
+        userDao.addUser(user);
+    }
 
 
     public void removeUserById(long id) throws SQLException {
         userDao.removeUserById(id);
     }
+  /*  private UserRepository repository;
+    public UserServiceImp() {
+
+    }
+
+    @Autowired
+    public UserServiceImp(UserRepository repository) {
+        super();
+        this.repository = repository;
+    }
+
+    @Override
+    public List getAllUsers() {
+        List list = new ArrayList();
+        repository.findAll().forEach(e -> list.add(e));
+        return list;
+    }*/
+
     @Transactional(readOnly = true)
     public List<User> getAllUsers() throws SQLException {
         return userDao.getAllUsers();

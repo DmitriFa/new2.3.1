@@ -1,12 +1,14 @@
 package web.dao;
 
 import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,21 +29,29 @@ public class UserDaoImp implements UserDao {
         return null;
     }
 
-   /* @Autowired
-   // EntityManagerFactory emf = Persistence.createEntityManagerFactory("jm.task.core.jdbc");
-   // @PersistenceContext
-   // EntityManager em = emf.createEntityManager();
+  //  @Autowired
+  //  EntityManagerFactory emf= (EntityManagerFactory) new HibernateConfig().entityManagerFactory();
 
 
 
-   // User user = new User("Даннил", "Гранин", (byte) 38);
+   @Autowired
+    private EntityManagerFactory emf;
+
+   @PersistenceContext
+    EntityManager em ;
+
+   @Autowired
+    User user = new User("Даннил", "Гранин", (byte) 38);
+
     @Override
+    @Transactional
     public void addUser(User user) throws HibernateException, SQLException {
+        em= emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(user);
+        em.getTransaction().commit();
         em.flush();
-
-    }*/
+    }
 
     @Override
     public void saveUser(String name, String lastName, byte age) throws HibernateException {
@@ -56,24 +66,31 @@ public class UserDaoImp implements UserDao {
     public void updateUserById(long id) throws SQLException {
 
     }
+  /*  private UserRepository repository;
+    @Override
+    public List getAllUsers() {
+        List list = new ArrayList();
+        repository.findAll().forEach(e -> list.add(e));
+        return list;
+    }*/
 
-   @Autowired
-    private SessionFactory sessionFactory;
+  // @Autowired
+   // private SessionFactory sessionFactory;
 
     @Override
     @Transactional
     public List<User> getAllUsers() throws SQLException {
-        List<User> list = new ArrayList<User>();
+       List<User> list = new ArrayList<User>();
         User user =new User("Igor","Brikotkin",(byte)78);
         User user1 =new User("Bogdan","Titomir",(byte)34);
         User user2 =new User("Вася","Пупкин",(byte)65);
         list.add(user);
         list.add(user1);
         list.add(user2);
-       // EntityManager em = getEntityManager();
+      // EntityManager em = emf.createEntityManager();
       // TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
-        return list;
-              //  query.getResultList();
+        return  //null;
+               list;
     }
 
 

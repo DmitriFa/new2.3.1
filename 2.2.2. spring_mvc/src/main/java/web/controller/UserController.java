@@ -21,7 +21,7 @@ public class UserController {
 
         this.userService = userService;
     }
-
+    
    UserServiceImp serviceImp = new UserServiceImp();
     @GetMapping(value = "/users")
     public String printCar( ModelMap model) throws SQLException {

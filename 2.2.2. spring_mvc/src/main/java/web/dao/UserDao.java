@@ -13,7 +13,7 @@ public interface UserDao {
 
     TransactionDefinition dropUsersTable() throws SQLException;
 
-   // void addUser(User user) throws SQLException, Exception;
+    void addUser(User user) throws SQLException, Exception;
 
     void saveUser(String name,String lastName,byte age);
 

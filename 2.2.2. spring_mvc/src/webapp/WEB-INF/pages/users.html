@@ -15,10 +15,10 @@
             <td>Age</td>
         </tr>
 
-        <tr th:each="car : ${messages}">
-            <td th:text="${car.getName()}"></td>
-            <td th:text="${car.getLastName()}"></td>
-            <td th:text="${car.getAge()}"></td>
+        <tr th:each="user : ${messages}">
+            <td th:text="${user.getName()}"></td>
+            <td th:text="${user.getLastName()}"></td>
+            <td th:text="${user.getAge()}"></td>
         </tr>
 
     </table>
