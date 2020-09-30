@@ -11,11 +11,15 @@ import java.util.List;
 @Service
 @Transactional
 public class UserServiceImp implements UserService {
+    UserServiceImp(){
 
-    //UserDaoImp userDao = new UserDaoImp();
+    }
+
 
   @Autowired
   private UserDao userDao;
+
+
 
     public void createUsersTable() throws SQLException {
         userDao.createUsersTable();
