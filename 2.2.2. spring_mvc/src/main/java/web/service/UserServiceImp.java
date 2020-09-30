@@ -1,6 +1,6 @@
 package web.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import web.dao.UserDao;
 import web.dao.UserDaoImp;
@@ -8,13 +8,13 @@ import web.model.User;
 
 import java.sql.SQLException;
 import java.util.List;
-
+@Service
 @Transactional
 public class UserServiceImp implements UserService {
 
     UserDaoImp userDao = new UserDaoImp();
 
-  @Autowired
+
   private UserDao userdao;
 
     public void createUsersTable() throws SQLException {
@@ -59,6 +59,7 @@ public class UserServiceImp implements UserService {
     @Transactional(readOnly = true)
     public List<User> getAllUsers() throws SQLException {
         return userDao.getAllUsers();
+
     }
 
     public void cleanUsersTable() throws SQLException {

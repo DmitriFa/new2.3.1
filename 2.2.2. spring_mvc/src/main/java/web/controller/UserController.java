@@ -10,19 +10,12 @@ import java.sql.SQLException;
 
 @Controller
 public class UserController {
-    private UserServiceImp userService;
 
     public UserController() {
 
     }
 
-   // @Autowired
-    public UserController(UserServiceImp userService) {
-
-        this.userService = userService;
-    }
-    
-   UserServiceImp serviceImp = new UserServiceImp();
+  private final UserServiceImp serviceImp = new UserServiceImp();
     @GetMapping(value = "/users")
     public String printCar( ModelMap model) throws SQLException {
           String  tablename = "USERS";
