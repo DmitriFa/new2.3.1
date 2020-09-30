@@ -24,17 +24,11 @@ public class UserDaoImp implements UserDao {
         return null;
     }
 
-    // @Autowired
-    // User user = new User("Даннил", "Гранин", (byte) 38);
 
     @Override
     @Transactional
     public void addUser(User user) throws HibernateException, SQLException {
-        //  em= emf.createEntityManager();
-        // em.getTransaction().begin();
-        // em.persist(user);
-        // em.getTransaction().commit();
-        //em.flush();
+        
     }
 
     @Override
