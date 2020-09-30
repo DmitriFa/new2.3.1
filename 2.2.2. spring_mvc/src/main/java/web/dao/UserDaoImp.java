@@ -1,6 +1,7 @@
 package web.dao;
 
 import org.hibernate.HibernateException;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
@@ -10,10 +11,11 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.List;
-
+@Repository
 @Transactional
 public class UserDaoImp implements UserDao {
-
+    @PersistenceContext
+    private EntityManager em;
     @Override
     public void createUsersTable() throws SQLException {
 
@@ -28,7 +30,7 @@ public class UserDaoImp implements UserDao {
     @Override
     @Transactional
     public void addUser(User user) throws HibernateException, SQLException {
-        
+
     }
 
     @Override
@@ -45,9 +47,6 @@ public class UserDaoImp implements UserDao {
 
     }
 
-    @PersistenceContext
-    EntityManager em;
-
     @Override
     @Transactional
     public List<User> getAllUsers() throws SQLException {
@@ -61,8 +60,7 @@ public class UserDaoImp implements UserDao {
       // EntityManager em = emf.createEntityManager();*/
         //TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
 
-        TypedQuery<User> query =
-                em.createQuery("SELECT * FROM userex", User.class);
+        TypedQuery<User> query = em.createQuery("SELECT * FROM userex", User.class);
         return query.getResultList(); //null;
         //list;
     }
