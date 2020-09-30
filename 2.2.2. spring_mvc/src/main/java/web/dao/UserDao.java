@@ -21,7 +21,7 @@ public interface UserDao {
 
     void updateUserById(long id) throws SQLException;
 
-    List<User> getAllUsers() throws SQLException;
+     List<User> getAllUsers() throws SQLException;
 
     void cleanUsersTable() throws SQLException;
 }

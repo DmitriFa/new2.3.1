@@ -13,9 +13,6 @@ import java.util.List;
 
 @Transactional
 public class UserDaoImp implements UserDao {
-    public UserDaoImp() {
-    }
-
 
     @Override
     public void createUsersTable() throws SQLException {
@@ -27,28 +24,16 @@ public class UserDaoImp implements UserDao {
         return null;
     }
 
-  //  @Autowired
-  //  EntityManagerFactory emf= (EntityManagerFactory) new HibernateConfig().entityManagerFactory();
-
-   // @Autowired
-   // private SessionFactory sessionFactory;
-
-
-   //@Autowired
-    //private EntityManagerFactory emf;
-
-
-
-  // @Autowired
-   // User user = new User("Даннил", "Гранин", (byte) 38);
+    // @Autowired
+    // User user = new User("Даннил", "Гранин", (byte) 38);
 
     @Override
     @Transactional
     public void addUser(User user) throws HibernateException, SQLException {
-      //  em= emf.createEntityManager();
-       // em.getTransaction().begin();
-       // em.persist(user);
-       // em.getTransaction().commit();
+        //  em= emf.createEntityManager();
+        // em.getTransaction().begin();
+        // em.persist(user);
+        // em.getTransaction().commit();
         //em.flush();
     }
 
@@ -65,18 +50,10 @@ public class UserDaoImp implements UserDao {
     public void updateUserById(long id) throws SQLException {
 
     }
-  /*  private UserRepository repository;
-    @Override
-    public List getAllUsers() {
-        List list = new ArrayList();
-        repository.findAll().forEach(e -> list.add(e));
-        return list;
-    }*/
 
-   //@Autowired
-  // private SessionFactory sessionFactory;
-   @PersistenceContext
-   EntityManager em ;
+    @PersistenceContext
+    EntityManager em;
+
     @Override
     @Transactional
     public List<User> getAllUsers() throws SQLException {
@@ -88,12 +65,12 @@ public class UserDaoImp implements UserDao {
         list.add(user1);
         list.add(user2);
       // EntityManager em = emf.createEntityManager();*/
-       //TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
-       
+        //TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
+
         TypedQuery<User> query =
                 em.createQuery("SELECT * FROM userex", User.class);
-       return query.getResultList(); //null;
-               //list;
+        return query.getResultList(); //null;
+        //list;
     }
 
 
