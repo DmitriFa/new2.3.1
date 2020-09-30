@@ -89,7 +89,8 @@ public class UserDaoImp implements UserDao {
         list.add(user2);
       // EntityManager em = emf.createEntityManager();*/
        //TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
-       TypedQuery<User> query =
+       
+        TypedQuery<User> query =
                 em.createQuery("SELECT * FROM userex", User.class);
        return query.getResultList(); //null;
                //list;
