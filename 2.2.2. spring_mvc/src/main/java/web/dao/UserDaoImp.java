@@ -1,12 +1,12 @@
 package web.dao;
 
 import org.hibernate.HibernateException;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.List;
@@ -30,15 +30,14 @@ public class UserDaoImp implements UserDao {
   //  @Autowired
   //  EntityManagerFactory emf= (EntityManagerFactory) new HibernateConfig().entityManagerFactory();
 
-    @Autowired
-    private SessionFactory sessionFactory;
+   // @Autowired
+   // private SessionFactory sessionFactory;
 
 
    //@Autowired
     //private EntityManagerFactory emf;
 
-   //@PersistenceContext
-   // EntityManager em ;
+
 
   // @Autowired
    // User user = new User("Даннил", "Гранин", (byte) 38);
@@ -74,9 +73,10 @@ public class UserDaoImp implements UserDao {
         return list;
     }*/
 
-  // @Autowired
-   // private SessionFactory sessionFactory;
-
+   //@Autowired
+  // private SessionFactory sessionFactory;
+   @PersistenceContext
+   EntityManager em ;
     @Override
     @Transactional
     public List<User> getAllUsers() throws SQLException {
@@ -88,8 +88,10 @@ public class UserDaoImp implements UserDao {
         list.add(user1);
         list.add(user2);
       // EntityManager em = emf.createEntityManager();*/
-       TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
-        return query.getResultList(); //null;
+       //TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
+       TypedQuery<User> query =
+                em.createQuery("SELECT * FROM userex", User.class);
+       return query.getResultList(); //null;
                //list;
     }
 
