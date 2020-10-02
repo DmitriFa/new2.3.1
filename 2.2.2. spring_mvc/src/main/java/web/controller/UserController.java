@@ -10,24 +10,25 @@ import java.sql.SQLException;
 
 @Controller
 public class UserController {
-
-    private UserServiceImp serviceImp;
+   // @Autowired
+    private UserServiceImp userServiceImp ;
 
     public UserController(){
 
     }
 
-    public UserController(UserServiceImp serviceImp) {
-    this.serviceImp= serviceImp;
-    }
+    public UserController(UserServiceImp userSeviceImp) {
+
+        this.userServiceImp= userSeviceImp;
+   }
 
 
 
     @GetMapping(value = "/users")
-    public String printCar( ModelMap model) throws SQLException {
+    public String printUser( ModelMap model) throws SQLException {
           String  tablename = "USERS";
         model.addAttribute("tablename", tablename);
-        model.addAttribute("messages",serviceImp.getAllUsers());
+        model.addAttribute("messages",userServiceImp.getAllUsers());
         return "users";
     }
 }
