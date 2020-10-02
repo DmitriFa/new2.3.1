@@ -1,6 +1,8 @@
 package web.dao;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,19 +11,16 @@ import web.model.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+
 @Repository
 @Transactional
 public class UserDaoImp implements UserDao {
- @PersistenceContext
- private EntityManager em;
+    @PersistenceContext
+    private EntityManager em;
 
-    UserDaoImp(){
+    UserDaoImp() {
     }
-
-   // @Autowired
-   // private SessionFactory sessionFactory;
 
 
     @Override
@@ -58,25 +57,11 @@ public class UserDaoImp implements UserDao {
     @Override
     @Transactional
     public List<User> getAllUsers() throws SQLException {
-         List<User> list = new ArrayList<User>();
-         User user =new User("Igor","Brikotkin",(byte)78);
-           User user1 =new User("Bogdan","Titomir",(byte)34);
-          User user2 =new User("Вася","Пупкин",(byte)65);
-           list.add(user);
-           list.add(user1);
-           list.add(user2);
-        // // EntityManager em = emf.createEntityManager();
-       // TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
-    // String hql = "FROM User";
-    // Query query = session.createQuery(hql);
-    // List<User> users = query.list();
-     //  TypedQuery<User> query = em.createQuery(" FROM userex ", User.class);
-     ///  String hql = "from User";
-     ///  Session session = em.unwrap(Session.class);
-      /// Query query = session.createQuery(hql);
-      /// List<User> users = query.list();
-      return list;
-              ///users;
+        String hql = "from User";
+        Session session = em.unwrap(Session.class);
+        Query query = session.createQuery(hql);
+        List<User> users = query.list();
+        return users;
 
     }
 

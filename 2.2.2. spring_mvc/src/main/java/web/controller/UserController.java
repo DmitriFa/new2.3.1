@@ -11,15 +11,17 @@ import java.sql.SQLException;
 @Controller
 public class UserController {
    // @Autowired
-    private UserServiceImp userServiceImp ;
+   private UserServiceImp userServiceImp ;
+
+
 
     public UserController(){
 
     }
 
-    public UserController(UserServiceImp userSeviceImp) {
+    public UserController(UserServiceImp userServiceImp) {
 
-        this.userServiceImp= userSeviceImp;
+        this.userServiceImp= userServiceImp;
    }
 
 
