@@ -10,7 +10,6 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -23,19 +22,18 @@ public class UserDaoImp implements UserDao {
 
 
     @Override
-    public void createUsersTable() throws SQLException {
+    public void createUsersTable() throws HibernateException {
 
     }
 
     @Override
-    public TransactionDefinition dropUsersTable() throws SQLException {
+    public TransactionDefinition dropUsersTable() throws HibernateException {
         return null;
     }
 
-
     @Override
     @Transactional
-    public void addUser(User user) throws HibernateException, SQLException {
+    public void addUser(User user) throws HibernateException {
         em.getTransaction().begin();
         em.persist(user);
         em.getTransaction().commit();
@@ -52,24 +50,22 @@ public class UserDaoImp implements UserDao {
     }
 
     @Override
-    public void updateUserById(long id) throws SQLException {
+    public void updateUserById(long id) throws HibernateException {
 
     }
 
     @Override
     @Transactional
-    public List<User> getAllUsers() throws SQLException {
+    public List<User> getAllUsers() throws HibernateException {
         String hql = "from User";
         Session session = em.unwrap(Session.class);
         Query query = session.createQuery(hql);
-        List<User> users = query.list();
-        return users;
-
+        return query.list();
     }
 
 
     @Override
-    public void cleanUsersTable() throws SQLException {
+    public void cleanUsersTable() throws HibernateException {
 
     }
 }
