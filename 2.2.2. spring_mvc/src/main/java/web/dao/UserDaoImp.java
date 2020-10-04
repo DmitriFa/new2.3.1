@@ -1,6 +1,8 @@
 package web.dao;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,14 +10,18 @@ import web.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.sql.SQLException;
 import java.util.List;
+
 @Repository
-@Transactional
 public class UserDaoImp implements UserDao {
     @PersistenceContext
-    private EntityManager em;
+    EntityManager em;
+
+    public UserDaoImp() {
+    }
+
+
     @Override
     public void createUsersTable() throws SQLException {
 
@@ -30,7 +36,10 @@ public class UserDaoImp implements UserDao {
     @Override
     @Transactional
     public void addUser(User user) throws HibernateException, SQLException {
-
+        em.getTransaction().begin();
+        em.persist(user);
+        em.getTransaction().commit();
+        em.flush();
     }
 
     @Override
@@ -50,19 +59,12 @@ public class UserDaoImp implements UserDao {
     @Override
     @Transactional
     public List<User> getAllUsers() throws SQLException {
-      /* List<User> list = new ArrayList<User>();
-        User user =new User("Igor","Brikotkin",(byte)78);
-        User user1 =new User("Bogdan","Titomir",(byte)34);
-        User user2 =new User("Вася","Пупкин",(byte)65);
-        list.add(user);
-        list.add(user1);
-        list.add(user2);
-      // EntityManager em = emf.createEntityManager();*/
-        //TypedQuery<User> query=sessionFactory.getCurrentSession().createQuery("from User");
+        String hql = "from User";
+        Session session = em.unwrap(Session.class);
+        Query query = session.createQuery(hql);
+        List<User> users = query.list();
+        return users;
 
-        TypedQuery<User> query = em.createQuery("SELECT * FROM userex", User.class);
-        return query.getResultList(); //null;
-        //list;
     }
 
 

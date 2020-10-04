@@ -1,7 +1,6 @@
 package web.controller;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,14 +15,17 @@ public class UserController {
 
     }
 
-    @Autowired
     private UserServiceImp serviceImp;
 
+    public UserController(UserServiceImp serviceImp) {
+        this.serviceImp = serviceImp;
+    }
+
     @GetMapping(value = "/users")
-    public String printCar( ModelMap model) throws SQLException {
-          String  tablename = "USERS";
+    public String printUser(ModelMap model) throws SQLException {
+        String tablename = "USERS";
         model.addAttribute("tablename", tablename);
-        model.addAttribute("messages",serviceImp.getAllUsers());
+        model.addAttribute("messages", serviceImp.getAllUsers());
         return "users";
     }
 }
