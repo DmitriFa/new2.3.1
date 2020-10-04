@@ -57,10 +57,11 @@ public class UserDaoImp implements UserDao {
     @Override
     @Transactional
     public List<User> getAllUsers() throws HibernateException {
-        String hql = "from User";
+        String hql = "from User where age ='99'";
         Session session = em.unwrap(Session.class);
         Query query = session.createQuery(hql);
-        return query.list();
+        List users = query.list();
+        return users;
     }
 
 

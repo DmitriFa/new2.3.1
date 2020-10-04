@@ -7,20 +7,19 @@ import web.model.User;
 
 import java.sql.SQLException;
 import java.util.List;
+
 @Service
 @Transactional
 public class UserServiceImp implements UserService {
 
-  //  UserDaoImp userDao = new UserDaoImp();
+    private UserDaoImp userDao;
 
-
-  private UserDaoImp userDao;
-  public UserServiceImp(){
-
-  }
-    public UserServiceImp(UserDaoImp userDao){
-
+    public UserServiceImp() {
     }
+
+    public UserServiceImp(UserDaoImp userDao) {
+    }
+
     public void createUsersTable() throws SQLException {
         userDao.createUsersTable();
     }
@@ -29,36 +28,17 @@ public class UserServiceImp implements UserService {
         userDao.dropUsersTable();
     }
 
-
-    public void saveUser(String name, String lastName, byte age)  {
-        userDao.saveUser(name,lastName,age);
+    public void saveUser(String name, String lastName, byte age) {
+        userDao.saveUser(name, lastName, age);
     }
 
     public void addUser(User user) throws SQLException {
         userDao.addUser(user);
     }
 
-
     public void removeUserById(long id) throws SQLException {
         userDao.removeUserById(id);
     }
-  /*  private UserRepository repository;
-    public UserServiceImp() {
-
-    }
-
-    @Autowired
-    public UserServiceImp(UserRepository repository) {
-        super();
-        this.repository = repository;
-    }
-
-    @Override
-    public List getAllUsers() {
-        List list = new ArrayList();
-        repository.findAll().forEach(e -> list.add(e));
-        return list;
-    }*/
 
     @Transactional(readOnly = true)
     public List<User> getAllUsers() throws SQLException {
@@ -68,6 +48,4 @@ public class UserServiceImp implements UserService {
     public void cleanUsersTable() throws SQLException {
         userDao.cleanUsersTable();
     }
-
-
 }
