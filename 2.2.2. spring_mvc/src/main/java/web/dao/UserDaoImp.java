@@ -14,6 +14,7 @@ import java.util.List;
 
 @Repository
 public class UserDaoImp implements UserDao {
+
     @PersistenceContext
     EntityManager em;
 
@@ -51,16 +52,14 @@ public class UserDaoImp implements UserDao {
 
     @Override
     public void updateUserById(long id) throws HibernateException {
-
     }
 
     @Override
     @Transactional
     public List<User> getAllUsers() throws HibernateException {
-        String hql = "from User where age ='99'";
         Session session = em.unwrap(Session.class);
-        Query query = session.createQuery(hql);
-        List users = query.list();
+        Query query = session.createQuery("from User");
+        List <User>users = query.list();
         return users;
     }
 
