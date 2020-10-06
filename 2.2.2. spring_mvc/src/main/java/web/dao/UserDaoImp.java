@@ -4,7 +4,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.annotation.Transactional;
 import web.model.User;
 
@@ -21,17 +20,6 @@ public class UserDaoImp implements UserDao {
     public UserDaoImp() {
     }
 
-
-    @Override
-    public void createUsersTable() throws HibernateException {
-
-    }
-
-    @Override
-    public TransactionDefinition dropUsersTable() throws HibernateException {
-        return null;
-    }
-
     @Override
     @Transactional
     public void addUser(User user) throws HibernateException {
@@ -41,17 +29,17 @@ public class UserDaoImp implements UserDao {
         em.flush();
     }
 
-    @Override
-    public void saveUser(String name, String lastName, byte age) throws HibernateException {
 
+    @Override
+    @Transactional
+    public void removeUser(User user) throws HibernateException {
+        em.getTransaction().begin();
     }
 
     @Override
-    public void removeUserById(long id) throws HibernateException {
-    }
+    @Transactional
+    public   void updateUser(User user){
 
-    @Override
-    public void updateUserById(long id) throws HibernateException {
     }
 
     @Override
@@ -62,11 +50,11 @@ public class UserDaoImp implements UserDao {
         List <User>users = query.list();
         return users;
     }
+   @Override
+   @Transactional
+   public User getUserById(int id){
+        return getAllUsers().get(id);
+   }
 
-
-    @Override
-    public void cleanUsersTable() throws HibernateException {
-
-    }
 }
 

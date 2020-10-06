@@ -1,28 +1,20 @@
 package web.dao;
 
 
-import org.springframework.transaction.TransactionDefinition;
 import web.model.User;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDao {
 
-    void createUsersTable() throws SQLException;
+    void addUser(User user) throws  Exception;
 
-    TransactionDefinition dropUsersTable() throws SQLException;
+    void removeUser(User user) throws Exception;
 
-    void addUser(User user) throws SQLException, Exception;
+    void updateUser(User user) throws  Exception;
 
-    void saveUser(String name,String lastName,byte age);
+    List<User> getAllUsers() throws Exception;
 
-    void removeUserById(long id) throws SQLException;
-
-    void updateUserById(long id) throws SQLException;
-
-     List<User> getAllUsers() throws SQLException;
-
-    void cleanUsersTable() throws SQLException;
+    User getUserById(int id) throws  Exception;
 }
 

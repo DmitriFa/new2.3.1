@@ -10,12 +10,14 @@
 <div>
     <table border="4" width="75%">
         <tr>
+            <td>Id</td>
             <td>Name</td>
             <td>Lastname</td>
             <td>Age</td>
         </tr>
 
         <tr th:each="user : ${messages}">
+            <td th:text="${user.getId()}"></td>
             <td th:text="${user.getName()}"></td>
             <td th:text="${user.getLastName()}"></td>
             <td th:text="${user.getAge()}"></td>
