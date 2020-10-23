@@ -8,7 +8,7 @@
 <body>
 <div>
     <table border="4" width="75%">
-        <caption>Пользователи</caption>
+        <caption>USER</caption>
         <tr>
             <td>Id</td>
             <td>Фамилия</td>
@@ -16,18 +16,13 @@
             <td>Возраст</td>
             <td colspan="2">Action</td>
         </tr>
-
         <tr th:each="user : ${messages}">
-            <td th:text="${user.getId()}"></td>
+           <td th:text="${user.getId()}"></td>
             <td th:text="${user.getLastName()}"></td>
             <td th:text="${user.getName()}"></td>
             <td th:text="${user.getAge()}"></td>
             <td><a href="/edit"/>edit</a></td>
             <td><a th:href="@{/delete/{id}(id=${user.getId()})}">delete</a></td>
-        </tr>
-        <tr>
-            <td colspan="6">
-                <a href="/add"/>Add new user</a></td>
         </tr>
     </table>
 

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8"language="java" >
+    <title></title>
+</head>
+<body>
+<h4>USERS</h4>
+<div>
+    <form th:action="@{/users}" th:method="PUTCH" th:object="${user}">
+        <p>Edit user</p>
+       <tr th:each="user : ${messages}">
+           <label for="lastname">LastName</label>
+           <input name="lastname"type="text" id="lastname"/>
+           <label for="name">Name</label>
+           <input name="name" type="text" id="name"/>
+           <label for="age">Age</label>
+           <input name="age" type="number" id="age"/>
+        <input type="submit" value="Edit User">
+        </tr>
+    </form>
+</div>
+</body>
+</html>

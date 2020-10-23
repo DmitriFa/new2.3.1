@@ -11,8 +11,12 @@ import java.util.List;
 @Service
 @Transactional
 public class UserServiceImp implements UserService {
+
+   private UserDao userDao;
     @Autowired
-    UserDao userDao;
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     public UserServiceImp() {
     }
@@ -35,6 +39,12 @@ public class UserServiceImp implements UserService {
     }
 
     public User getUserById(int id) throws Exception {
-        return getAllUsers().get(id);
+      // return getAllUsers().get(id);
+       return userDao.getUserById(id);
+    }
+    @Override
+    @Transactional
+    public boolean checkLastName(String lastName) throws Exception {
+        return userDao.checkLastName(lastName);
     }
 }

@@ -10,13 +10,10 @@ import java.util.List;
 public interface UserService {
 
     void addUser(User user) throws Exception;
-
     void removeUser(User user) throws Exception;
-
-    void updateUser(User user) throws Exception;
-
-    List<User> getAllUsers() throws Exception;
-
-    User getUserById(int id) throws Exception;
+    void updateUser(User user)throws Exception;
+    List<User> getAllUsers()throws Exception;
+    User getUserById(int id)throws Exception;
+    boolean checkLastName(String lastName)throws Exception;
 
 }

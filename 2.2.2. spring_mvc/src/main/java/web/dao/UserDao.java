@@ -16,5 +16,8 @@ public interface UserDao {
     List<User> getAllUsers() throws Exception;
 
     User getUserById(int id) throws  Exception;
+
+    boolean checkLastName(String lastName)throws Exception;
+
 }
 

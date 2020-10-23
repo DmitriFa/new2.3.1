@@ -23,38 +23,46 @@ public class UserDaoImp implements UserDao {
     @Override
     @Transactional
     public void addUser(User user) throws HibernateException {
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
-        em.flush();
+       Session session = em.unwrap(Session.class);
+       session.save(user);
     }
 
 
     @Override
     @Transactional
     public void removeUser(User user) throws HibernateException {
-        em.getTransaction().begin();
+        Session session = em.unwrap(Session.class);
+        session.delete(user);
     }
 
     @Override
     @Transactional
     public   void updateUser(User user){
-
+        Session session = em.unwrap(Session.class);
+        session.update(user);
     }
 
     @Override
     @Transactional
     public List<User> getAllUsers() throws HibernateException {
         Session session = em.unwrap(Session.class);
-        Query query = session.createQuery("from User");
-        List <User>users = query.list();
-        return users;
+       return session.createQuery("from User").list();
     }
    @Override
    @Transactional
    public User getUserById(int id){
-        return getAllUsers().get(id);
+     // Session session = em.unwrap(Session.class);
+      // return session.get(User.class, id);
+       return (User) em.find(User.class, id);
    }
-
+    @Override
+    @Transactional
+    public boolean checkLastName(String lastName) {
+        Session session = em.unwrap(Session.class);
+        Query query;
+        query = session.createQuery("from User where lastName = :lastName");
+        query.setParameter("title", lastName);
+        return query.list().isEmpty();
+    }
 }
 
