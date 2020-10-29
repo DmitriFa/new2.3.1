@@ -8,18 +8,27 @@
 <body>
 <h4>USERS</h4>
 <div>
-    <form th:action="@{/users}" th:method="PUTCH" th:object="${user}">
+    <form th:action="@{/edit}" th:method="POST">
         <p>Edit user</p>
        <tr th:each="user : ${messages}">
-           <label for="lastname">LastName</label>
-           <input name="lastname"type="text" id="lastname"/>
-           <label for="name">Name</label>
-           <input name="name" type="text" id="name"/>
-           <label for="age">Age</label>
-           <input name="age" type="number" id="age"/>
-        <input type="submit" value="Edit User">
+            <input type="hidden" name="id" th:value="${user.getId()}"/>
+            <label for="lastname">LastName</label>
+            <input name="lastname"type="text"th:value="${user.getLastName()}"id="lastname" required/>
+            <label for="name">Name</label>
+            <input name="name" type="text" th:value="${user.getName()}"id="name" required/>
+            <label for="age">Age</label>
+            <input name="age" type="number" th:value="${user.getAge()}"id="age"required/>
+            <input type="submit" value="Edit User">
         </tr>
-    </form>
-</div>
-</body>
-</html>
+        <!--     <label for="lastname">LastName</label>
+            <input name="lastname"type="text" id="lastname" required/>
+            <label for="name">Name</label>
+            <input name="name" type="text" id="name"required/>
+            <label for="age">Age</label>
+            <input name="age" type="number" id="age"required/>
+            <input type="submit" value="Add User">
+            </tr>-->
+        </form>
+    </div>
+    </body>
+    </html>

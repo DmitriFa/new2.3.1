@@ -32,15 +32,17 @@ public class UserServiceImp implements UserService {
     public void updateUser(User user) throws Exception {
         userDao.updateUser(user);
     }
-
+    @Override
     @Transactional(readOnly = true)
     public List<User> getAllUsers() throws Exception {
         return userDao.getAllUsers();
     }
 
-    public User getUserById(int id) throws Exception {
-      // return getAllUsers().get(id);
-       return userDao.getUserById(id);
+    @Override
+    @Transactional
+    public User getUserById(long id) throws Exception {
+     // return getAllUsers().get(id);
+      return userDao.getUserById(id);
     }
     @Override
     @Transactional
