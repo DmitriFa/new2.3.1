@@ -53,7 +53,7 @@ public class UserController {
         return modelAndView;
     }
 
- /*   @PostMapping(value = "/add")
+ /*  @PostMapping(value = "/add")
     public String create(@RequestParam("lastname") String lastname, @RequestParam("name") String name, @RequestParam("age") Byte age, ModelMap model) throws Exception {
         User user = new User();
         user.setLastName(lastname);
@@ -69,15 +69,15 @@ public class UserController {
         return "redirect:/";
     }*/
 
-  @RequestMapping(value = "/add", method = RequestMethod.POST)
+   @RequestMapping(value = "/add", method = RequestMethod.POST)
   public ModelAndView addUser(@ModelAttribute("user") User user) throws Exception {
-      ModelAndView modelAndView = new ModelAndView();
+       ModelAndView modelAndView = new ModelAndView();
       if (userService.checkLastName(user.getLastName())) {
           modelAndView.setViewName("redirect:/");
           userService.addUser(user);
       } else {
-          modelAndView.addObject("messages","part with lastName \"" + user.getLastName() + "\" already exists");
-          modelAndView.setViewName("redirect:/");
+         modelAndView.addObject("messages","part with lastName \"" + user.getLastName() + "\" already exists");
+         modelAndView.setViewName("redirect:/");
       }
       return modelAndView;
   }

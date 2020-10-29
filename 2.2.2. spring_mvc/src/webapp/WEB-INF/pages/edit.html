@@ -12,8 +12,8 @@
         <p>Edit user</p>
        <tr th:each="user : ${messages}">
             <input type="hidden" name="id" th:value="${user.getId()}"/>
-            <label for="lastname">LastName</label>
-            <input name="lastname"type="text"th:value="${user.getLastName()}"id="lastname" required/>
+            <label for="lastName">LastName</label>
+            <input name="lastName"type="text"th:value="${user.getLastName()}"id="lastName" required/>
             <label for="name">Name</label>
             <input name="name" type="text" th:value="${user.getName()}"id="name" required/>
             <label for="age">Age</label>
